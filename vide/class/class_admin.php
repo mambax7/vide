@@ -26,6 +26,7 @@ class admin {
         if ($this->creation == 1){
             $this->content[] = '</div>';
         }
+
         return implode("\n",$this->content);
     }
     public function crea_tableau_admin($table='',$id='tableau_admin',$liste='',$action='',$rapide=false,$cle='id'){
@@ -99,6 +100,7 @@ class admin {
         }
         $tableau[] = '</tr></tbody></table>';
         $this->content[] = implode("\n",$tableau);
+
         return true;
     }
     public function requis($requis){
@@ -148,7 +150,7 @@ class admin {
                 $tableau[0]['present'] = '';
                 $tableau[0]['couleur'] = '';
         }
+
         return $tableau;
     }
 }
- 

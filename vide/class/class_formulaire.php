@@ -13,6 +13,7 @@ class formulaire {
                 $temp .= '<script language="javascript">'."\n".'<!-- '."\n".'$.notifier.broadcast({ttl:\''.CHG_ERREUR.'\', msg:\''.addslashes($v).'\'});'."\n".'// -->'."\n".'</script>'."\n";
             }
         }
+
         return $temp;
     }
     // Invente un nom de fichier (pour les fichiers uploadés)
@@ -40,6 +41,7 @@ class formulaire {
                 $true = false;
             }
         }
+
         return $uid.$ext;
     }
     // Retaille les images
@@ -53,6 +55,7 @@ class formulaire {
 
         if ($a == 'v'){
             $this->inscrit_log('ERREUR_FRAMEWORKS','Frameworks');
+
             return false;
         }
         require_once $a.'/Frameworks/WideImage/WideImage.php';
@@ -82,6 +85,7 @@ class formulaire {
         if(!$keep_original) {
             @unlink( $src_path ) ;
         }
+
         return true;
     }
 }

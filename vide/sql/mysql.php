@@ -1,7 +1,7 @@
 <?php
 /**
  * CHG-WEB - MONTUY337513 - Philodenelle
- * 
+ *
  */
 // Fichier MySQL - V1.00
 // CHG-WEB - montuy337513 (cm@chg-web.com) - Philodenelle (philodenelle@chg-web.com)
@@ -54,14 +54,14 @@ $table[$DirName.'_log'] = array(
         'default' => '',
         'divers' => ''
     ),
-	array (
+    array (
         'champs' => 'url',
         'type' => 'varchar(150)',
         'null' => 0,
         'default' => '',
         'divers' => ''
     ),
-	array (
+    array (
         'champs' => 'provenance',
         'type' => 'varchar(150)',
         'null' => 0,
@@ -87,7 +87,7 @@ $table[$DirName.'_divers'] = array(
         'default' => '0',
         'divers' => ''
     ),
-	array (
+    array (
         'champs' => 'valeur',
         'type' => 'varchar(150)',
         'null' => 0,
@@ -245,7 +245,6 @@ foreach($liste_table as $k=>$v){
                     $increment = (in_array('auto_increment',$divers) or in_array('AUTO_INCREMENT',$divers)) ? ' auto_increment ' : '';
                     $requete[] = $colonne.$type.$nul.$defaut.$increment;
 
-
                 }
                 if(!is_array($vv) && $kk == 'primary') $requete[] = 'PRIMARY KEY (`'.$vv.'`)';
                 if(!is_array($vv) && $kk == 'key' && !empty($vv)){
@@ -271,4 +270,4 @@ foreach($liste_table as $k=>$v){
 
     }
 }
-echo $content; 
+echo $content;

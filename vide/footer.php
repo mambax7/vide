@@ -13,4 +13,3 @@ if (is_array($tableau_erreur) && count($tableau_erreur) > 0) {
     $xoopsTpl->assign('footer','');
 }
 include_once XOOPS_ROOT_PATH.'/footer.php';
- 

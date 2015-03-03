@@ -78,11 +78,13 @@ class maintenance {
         foreach ($this->sequence as $v) {
             $this->resultat .= $v;
         }
+
         return $this->resultat;
     }
     public function create_file_dump($uri_sauve) {
         $file_name = '/dump_'.date('Y.m.d').'_'.date('H.i.s').'.sql';
         $this->path_file = $uri_sauve.$file_name;
+
         return file_put_contents($this->path_file, $this->resultat);
     }
     // Nettoyage et optimisation des tables du modules

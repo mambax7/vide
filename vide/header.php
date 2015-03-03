@@ -16,7 +16,6 @@ $$DirName->add_query($champs);
 $liste_cat = $$DirName->liste('categorie','`actif`=1');
 $cid = $$DirName->requete('get','cid',$cid);
 
-
 $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : XOOPS_GROUP_ANONYMOUS;
 $gperm_handler =& xoops_gethandler('groupperm');
 if($cid > 0){
@@ -39,6 +38,3 @@ if($cid > 0){
         $_SESSION['cid'] = 0;
     }
 }
-
-
-

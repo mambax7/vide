@@ -4,7 +4,7 @@ class kernel{
     protected $liste_class = array();
     protected $liste_variable = array();
     protected $divers = array();
-	public $fin_page = array();
+    public $fin_page = array();
     public $DirName = ''; // Nom du module
     public $lcen = 1; // Compatible LCEN
     public $seo = 0; // Activation de l'URL REWRITING
@@ -12,10 +12,10 @@ class kernel{
     public $utilisateur = '';
     public $en_provenance = ''; // D'où provient l'utilisateur
     public $url_en_cours = '';
-	public $nbcomindex = 20;
-	public $nbcom = 20;
-	public $url_module = '';
-	public $barenav = 0; // A 1 si barre de navigation
+    public $nbcomindex = 20;
+    public $nbcom = 20;
+    public $url_module = '';
+    public $barenav = 0; // A 1 si barre de navigation
     public $pagenav = ''; // La barre de navigation
     public $largeur_popup = 600;
     // Class extérieur
@@ -44,6 +44,7 @@ class kernel{
     public function add_query($query){
         if (!is_array($query)) return false;
         $this->liste_variable = array_merge($this->liste_variable,$query);
+
         return true;
     }
     // Gestion des défauts
@@ -68,6 +69,7 @@ class kernel{
     // Stripslashes les tableaux
     public function stripslashes_deep($value){
         $value = is_array($value) ? array_map('kernel::stripslashes_deep', $value) : stripslashes($value);
+
         return $value;
     }
     public function netvar($variable,$type='quote'){
@@ -75,6 +77,7 @@ class kernel{
             case'table';
             case'groupe':
                 if (is_array($variable)) return  $variable;
+
                 return array();
             case'float':
                 return $variable;
@@ -124,6 +127,7 @@ class kernel{
         if ($sql == 1){
             $valeur = $this->lutte_sql($valeur);
         }
+
         return $valeur;
     }
     // lutte contre les injections MySQL
@@ -152,6 +156,7 @@ class kernel{
     // Récupération des valeurs du tableau
     public function valeur_config($cle){
         if (!array_key_exists($cle,$this->divers)) return false;
+
         return $this->divers[$cle];
     }
     // Mise a jour des dates de purge et de sauvegarde
@@ -173,6 +178,7 @@ class kernel{
         while($temp = $this->db->fetchArray($requete)){
             $list[$temp['id']] = $this->stripslashes_deep($temp);
         }
+
         return $list;
     }
     // Supprime dans mysql
@@ -180,6 +186,7 @@ class kernel{
         if (!empty($where)) {
             $where = ' WHERE '.$where;
         }
+
         return $this->db->queryF('DELETE FROM '.$this->db->prefix($this->liste_table[$table]).$where);
     }
     // Inserer dans mysql
@@ -202,6 +209,7 @@ class kernel{
                 $temp .= '`'.$v.'`='.$valeur[$k].'';
                 $premier = 1;
             }
+
             return $this->db->queryF('UPDATE '.$this->db->prefix($this->liste_table[$table]).' SET '.$temp.' '.$where.' '.$extra);
         }else{
             return false;
@@ -227,10 +235,12 @@ class kernel{
         }
         if ($temp === false){
             $this->inscrit_log(CHG_LOG_ERRSQL,sprintf(CHG_LOG_ACT_DES_NOTOK,$a,$b,$table));
+
             return false;
         }else{
 
             $this->inscrit_log(CHG_LOG_OPSQL,sprintf(CHG_LOG_ACT_DES,$a,$b,$table));
+
             return true;
         }
     }
@@ -240,6 +250,7 @@ class kernel{
         if (!empty($extra)) $extra = ' '.$extra;
         $temp = $this->db->query('SELECT count(`'.$id.'`) FROM '.$this->db->prefix($this->liste_table[$table]).$where.$extra);
         $resultat = $this->db->fetchrow($temp);
+
         return $resultat[0];
     }
     // Test si un un id est présent
@@ -247,6 +258,7 @@ class kernel{
         if ($valeur == 0) return false;
         if(!array_key_exists($table,$this->liste_table)) return false;
         if($this->compte($table,$cle,'`'.$cle.'`='.$valeur) == 1) return true;
+
         return false;
     }
     function chg_substr($str, $start, $length, $trimmarker = '...'){
@@ -255,14 +267,17 @@ class kernel{
         }
         if (function_exists('mb_internal_encoding') && @mb_internal_encoding(_CHARSET)) {
             $str2 = mb_strcut($str, $start, $length - strlen($trimmarker));
+
             return $str2 . (mb_strlen($str) != mb_strlen($str2) ? $trimmarker : '');
         }
+
         return $str;
     }
     // test les valeurs ON/OFF
     public function onoff($valeur){
         if(!ctype_digit($valeur)) return false;
         if ($valeur == 0 || $valeur == 1) return true;
+
         return false;
     }
     // Test le nombre de caractères
@@ -274,6 +289,7 @@ class kernel{
             $n = strlen($titre);
         }
         if ($n >= $min && $n <= $max) return true;
+
         return false;
     }
     // Inscription dans le log
@@ -295,11 +311,13 @@ class kernel{
             case'div':
                 return '<div id="CHG_titre"><h1>'.$titre.'</h1></div>';
         }
+
         return $titre;
     }
     // Creation de bouton pour tableau
     public function aff_button($nom,$titre,$id=''){
         $id1 = (empty($id)) ? '' : '&amp;id='.$id;
+
         return '<button class="CHG_button" onClick="self.location.href=\'?op='.$nom.$id1.'\'">'.$titre.'</button>';
     }
     // Création des pagesnav
@@ -318,11 +336,13 @@ class kernel{
                 $prev = '';
                 if ($nb_ligne == 0 OR $numero_page < 1){
                     $this->pagenav = '';
+
                     return true;
                 }
                 $tot_page = ceil($nb_ligne/$tempo);
                 if ($tot_page == 1){
                     $this->pagenav = '';
+
                     return true;
                 }
                 if ($numero_page == 1) {
@@ -336,6 +356,7 @@ class kernel{
         }
         $this->pagenav = '<div class="chg_pagenav">'.$prev.'<span>('.$numero_page.')</span>'.$next.'</div>';
         $this->barenav = 1;
+
         return true;
     }
     public function gest_date($datetime,$format=0){
@@ -354,6 +375,7 @@ class kernel{
                 break;
             case'1': // Mois en entier et heure complète
                 $months = array(_JANV, _FEV, _MAR, _AVR, _MAI, _JUI,_JUL, _AOU, _SEP, _OCT, _NOV, _DEC);
+
                 return $day.' '.$months[$month-1].' '.$year.' '.CHG_AT.' '.$hour.'h'.$min.'m'.$sec.'s';
                 break;
             case'0'; // format francophone
@@ -370,6 +392,7 @@ class kernel{
                 if ($valeur == 1){
                     return '<img src="'.$this->url_module.'/images/ok.png" />';
                 }
+
                 return '';
                 break;
             case'string':
@@ -400,6 +423,7 @@ class kernel{
         xoops_confirm(array( 'op' => 'conf_sup', 'id' => $id, 'ok' => 1),$this->url_module.$cible,sprintf(CHG_CONFIRM_SUP,$titre));
         $content = '<div>'.ob_get_contents().'</div>';
         ob_end_clean();
+
         return $content;
     }
     public function lien_voirplus($value,$contenu='',$nom_div='popup',$type=1){ //$type = 0 => image, $type = 1 => texte
@@ -413,6 +437,7 @@ class kernel{
             default :
                 $texte = $value;
         }
+
         return '<p class="center"><a href="#" data-width="'.$this->largeur_popup.'" data-rel="'.$nom_div.'_'.$nb.'" class="poplight" style="color: #384313;">'.$texte.'</a></p>';
     }
     // Affichage de la fiche LOG
@@ -426,6 +451,7 @@ class kernel{
         $content .= '<p><span class="gras">'.constant('_AM_'.$moduleUP.'_IP').' : </span>'.$tableau['ip'].'</p>';
         $content .= '<p><span class="gras">'.constant('_AM_'.$moduleUP.'_URL').' : </span>'.$tableau['url'].'</p>';
         $content .= '<p><span class="gras">'.constant('_AM_'.$moduleUP.'_REFFERER').' : </span>'.$tableau['provenance'].'</p>';
+
         return $content;
     }
     public function aff_tout_cat($tableau){
@@ -437,6 +463,7 @@ class kernel{
         $content .= '<p><span class="gras">'.constant('_AM_'.$moduleUP.'_PID').' :</span><br />'.$this->cellule('list_cat',$tableau['pid']).'</p>';
         $content .= '<p><span class="gras"><img src="'.URL_THUMB_CAT.'/'. $tableau['image'].'" /></p>';
         $content .= '<p><span class="gras">'.CHG_ACTF.' : </span>'.$tableau['actif'].'</p>';
+
         return $content;
     }
     public function aff_tout_item($tableau){
@@ -448,6 +475,7 @@ class kernel{
         $content .= '<p><span class="gras">'.constant('_AM_'.$moduleUP.'_PID').' :</span><br />'.$this->cellule('list_cat',$tableau['pid']).'</p>';
         $content .= '<p><span class="gras"><a href="'.URL_ITEM.'/'.$tableau['fichier'].'" >'.$tableau['fichier'].'</a></p>';
         $content .= '<p><span class="gras">'.CHG_ACTF.' : </span>'.$tableau['actif'].'</p>';
+
         return $content;
     }
     // Création des titres "ajouter X"
@@ -459,4 +487,3 @@ class kernel{
         return CHG_MODIF.' '.mb_strtolower($nom,'UTF-8');
     }
 }
- 

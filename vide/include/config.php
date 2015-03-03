@@ -14,7 +14,7 @@ if (!defined('URI_ITEM') )define('URI_ITEM',XOOPS_ROOT_PATH.'/uploads/'.$DirName
 if (!defined('URL_ITEM')) define('URL_ITEM',XOOPS_URL.'/uploads/'.$DirName.'/item');
 $type_gestion = 1; // 1=>mode debug, 2=>mode production (erreur dans log/error.log), 0=>Aucun traitement
 // Liste des tables raccourci_table => nom_table //
-$liste_table = array( 
+$liste_table = array(
     'log' => $DirName.'_log',
     'divers'  =>  $DirName.'_divers',
     'categorie' => $DirName.'_categorie',

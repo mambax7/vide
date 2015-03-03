@@ -25,6 +25,7 @@ class item{
             $champs[$n] = $k;
             $n++;
         }
+
         return $this->insert_sql('item',$champs,$valeur);
     }
     public function modif_item($id,$cid,$nom,$descriptif,$keywords,$image,$actif){
@@ -42,6 +43,7 @@ class item{
                 $n++;
             }
         }
+
         return ($this->modif_sql('item',$champs,$valeur,' WHERE `id`='.$id));
     }
     public function del_item($id){
@@ -49,4 +51,3 @@ class item{
 
     }
 }
- 

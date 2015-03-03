@@ -233,31 +233,31 @@ switch($op){
         $gperm_handler = &xoops_gethandler('groupperm');
         $full_list = array_keys($group_list);
         $groups_ids = array();
-        if($id > 0) {		// Edit mode
+        if($id > 0) {        // Edit mode
             $groups_ids = $gperm_handler->getGroupIds($DirName.'_delete', $id, $xoopsModule->getVar('mid'));
             $groups_ids = array_values($groups_ids);
             $groups_can_delete_checkbox = new XoopsFormCheckBox(constant('_AM_'.$moduleUP.'_DELETEFORM'), 'groups_can_delete[]', $groups_ids);
-        } else {	// Creation mode
+        } else {    // Creation mode
             $groups_can_delete_checkbox = new XoopsFormCheckBox(constant('_AM_'.$moduleUP.'_DELETEFORM'), 'groups_can_delete[]', $full_list);
         }
         $groups_can_delete_checkbox->addOptionArray($group_list);
         $form->addElement($groups_can_delete_checkbox);
         $groups_ids = array();
-        if($id > 0) {		// Edit mode
+        if($id > 0) {        // Edit mode
             $groups_ids = $gperm_handler->getGroupIds($DirName.'_submit', $id, $xoopsModule->getVar('mid'));
             $groups_ids = array_values($groups_ids);
             $groups_can_submit_checkbox = new XoopsFormCheckBox(constant('_AM_'.$moduleUP.'_SUBMITFORM'), 'groups_can_submit[]', $groups_ids);
-        } else {	// Creation mode
+        } else {    // Creation mode
             $groups_can_submit_checkbox = new XoopsFormCheckBox(constant('_AM_'.$moduleUP.'_SUBMITFORM'), 'groups_can_submit[]', $full_list);
         }
         $groups_can_submit_checkbox->addOptionArray($group_list);
         $form->addElement($groups_can_submit_checkbox);
         $groups_ids = array();
-        if($id > 0) {		// Edit mode
+        if($id > 0) {        // Edit mode
             $groups_ids = $gperm_handler->getGroupIds($DirName.'_view', $id, $xoopsModule->getVar('mid'));
             $groups_ids = array_values($groups_ids);
             $groups_can_view_checkbox = new XoopsFormCheckBox(constant('_AM_'.$moduleUP.'_VIEWFORM'), 'groups_can_view[]', $groups_ids);
-        } else {	// Creation mode
+        } else {    // Creation mode
             $groups_can_view_checkbox = new XoopsFormCheckBox(constant('_AM_'.$moduleUP.'_VIEWFORM'), 'groups_can_view[]', $full_list);
         }
         $groups_can_view_checkbox->addOptionArray($group_list);

@@ -23,11 +23,13 @@ class categorie{
                 $this->arbre_cat($v['id'],$etape,$tout);
             }
         }
+
         return true;
     }
     function liste_categorie($id=0){
         if (count($this->liste_cat) > 0) return $this->liste_cat;
         $this->arbre_cat($id);
+
         return $this->liste_cat;
     }
     public function crea_categorie($pid,$nom,$descriptif,$keywords,$image,$actif){
@@ -45,6 +47,7 @@ class categorie{
             $champs[$n] = $k;
             $n++;
         }
+
         return $this->insert_sql('categorie',$champs,$valeur);
     }
     public function modif_categorie($id,$pid,$nom,$descriptif,$keywords,$image,$actif){
@@ -62,6 +65,7 @@ class categorie{
                 $n++;
             }
         }
+
         return ($this->modif_sql('categorie',$champs,$valeur,' WHERE `id`='.$id));
     }
     public function del_cat($id){
@@ -70,6 +74,7 @@ class categorie{
         while (list($key, $val) = each($list)) {
             @unlink(URI_THUMB_CAT.'/'.$val['image']);
         }
+
         return $this->sup_sql('categorie','`id`='.$id);
 
     }

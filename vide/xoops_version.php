@@ -1,6 +1,6 @@
 <?php
 /**
- * CHG-WEB - MONTUY337513 - 2014-08-15 
+ * CHG-WEB - MONTUY337513 - 2014-08-15
  */
 if (!defined('XOOPS_ROOT_PATH')) die('XOOPS root path not defined');
 require __DIR__.'/include/config.php';
@@ -206,7 +206,3 @@ $modversion['search']['func'] = $DirName.'_search';
 
 // Smarty
 $modversion['use_smarty'] = 1;
-
-
-
-

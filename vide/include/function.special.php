@@ -27,10 +27,7 @@ if (!function_exists('chg_parse_function')){
         }
         $function_string = preg_replace($patterns, $replacements, $function_string);
         eval($function_string);
+
         return true;
     }
 }
-
-
-
- 

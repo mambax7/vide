@@ -47,4 +47,3 @@ chg_parse_function('
 	    return $ret;
     }
 ');
- 
