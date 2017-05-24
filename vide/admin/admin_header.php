@@ -30,7 +30,7 @@ if (file_exists($GLOBALS['xoops']->path($pathModuleAdmin . '/moduleadmin.php')))
     redirect_header('../../../admin.php', 5, CHG_MODULEADMIN_MISSING, FALSE);
     exit();
 }
-$myts =& MyTextSanitizer::getInstance();
+$myts = MyTextSanitizer::getInstance();
 if ($xoopsUser) {
     $moduleperm_handler =& xoops_gethandler('groupperm');
     if (!$moduleperm_handler->checkRight('module_admin', $xoopsModule->getVar( 'mid' ), $xoopsUser->getGroups())) {
